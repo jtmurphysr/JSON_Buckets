@@ -1,0 +1,20 @@
+#/etc/systemd/system/jsonbuckets.service
+
+[Unit]
+Description=Gunicorn instance to serve JSON Buckets
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/json-buckets
+ExecStart=/var/www/json-buckets/venv/bin/gunicorn --workers 3 --bind unix:/var/www/json-buckets/json-buckets.sock wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+
+'''
+sudo systemctl daemon-reexec
+sudo systemctl enable --now jsonbuckets
+'''
+

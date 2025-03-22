@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Project specific
+*.log
+data/
+config.json
+.env
+.env.*
+
+# Ubuntu specific
+.directory
+Thumbs.db
+.DS_Store
+*.bak
+*.tmp
+*.temp
+*.swp
+*~
+.dmrc
+.Trash-*
+.nfs*
+.fuse_hidden*
+.directory
+.thumbnails/
+.cache/
+.config/
+.local/
+
+# Logs
+*.log
+logs/
+log/
+
+# Local development
+*.sqlite3
+*.db
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Application specific
+*.sock
+json-buckets.sock 

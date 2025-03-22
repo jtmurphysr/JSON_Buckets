@@ -1,0 +1,2 @@
+INSERT INTO users (username, api_key) VALUES ('john', 'paste-key-here');
+
