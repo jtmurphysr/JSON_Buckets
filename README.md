@@ -69,6 +69,73 @@ This will:
 - Create a systemd service
 - Set up proper permissions
 
+## Docker Deployment
+
+### Quick Start with Docker
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/json-buckets.git
+cd json-buckets
+```
+
+2. Configure environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration if needed
+```
+
+3. Build and start the containers:
+```bash
+docker-compose up -d
+```
+
+4. Create a user and get an API key:
+```bash
+chmod +x docker-admin.sh
+./docker-admin.sh add-user myusername
+```
+
+5. Access the API at http://localhost:5000
+
+### Docker Management Commands
+
+- **Start the service**:
+  ```bash
+  docker-compose up -d
+  ```
+
+- **Stop the service**:
+  ```bash
+  docker-compose down
+  ```
+
+- **View logs**:
+  ```bash
+  docker-compose logs -f app
+  ```
+
+- **Add a new user**:
+  ```bash
+  ./docker-admin.sh add-user username
+  ```
+
+- **List all users**:
+  ```bash
+  ./docker-admin.sh list-users
+  ```
+
+- **Reset a user's API key**:
+  ```bash
+  ./docker-admin.sh reset-key username
+  ```
+
+### Container Security
+
+- The default credentials in .env.example should be changed for production
+- Persistent database data is stored in a Docker volume
+- Container networking is isolated with custom bridge network
+
 ## API Documentation
 
 ### Authentication

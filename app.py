@@ -147,5 +147,5 @@ def delete_bucket(bucket_id):
         return jsonify({"error": "Internal Server Error", "message": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=os.getenv('FLASK_DEBUG', '0') == '1')
 

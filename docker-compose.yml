@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=bucketuser
+      - MYSQL_PASSWORD=bucketpass
+      - MYSQL_DB=jsonbuckets
+      - FLASK_ENV=production
+      - FLASK_DEBUG=0
+      - RATELIMIT_STORAGE_URL=memory://
+    depends_on:
+      - db
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+    networks:
+      - jsonbuckets-network
+    command: sh -c "chmod +x /app/wait-for-db.sh && /app/wait-for-db.sh db && gunicorn --bind 0.0.0.0:5000 wsgi:app"
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=jsonbuckets
+      - MYSQL_USER=bucketuser
+      - MYSQL_PASSWORD=bucketpass
+      - MYSQL_ROOT_PASSWORD=rootpass
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
+    networks:
+      - jsonbuckets-network
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+networks:
+  jsonbuckets-network:
+    driver: bridge
+
+volumes:
+  mysql-data: 
